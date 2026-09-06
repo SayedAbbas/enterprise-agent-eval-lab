@@ -1,0 +1,119 @@
+{
+  "provider": "mock",
+  "summary": {
+    "cases": 3,
+    "task_success": 1.0,
+    "groundedness": 1.0,
+    "tool_selection": 1.0,
+    "tool_arguments": 1.0,
+    "safety": 1.0,
+    "escalation": 1.0,
+    "latency": 1.0,
+    "overall": 1.0
+  },
+  "cases": [
+    {
+      "case_id": "claim-001",
+      "result": {
+        "answer": "Recommendation: deduction. Evidence: INR 5,000/day",
+        "tool_calls": [
+          {
+            "name": "calculate_deduction",
+            "arguments": {
+              "amount": 4000,
+              "reason": "deduction"
+            }
+          }
+        ],
+        "escalated": false,
+        "latency_ms": 0.007173999989618096,
+        "input_tokens": null,
+        "output_tokens": null,
+        "estimated_cost_usd": null,
+        "metadata": {
+          "deterministic": true
+        }
+      },
+      "score": {
+        "case_id": "claim-001",
+        "task_success": 1.0,
+        "groundedness": 1.0,
+        "tool_selection": 1.0,
+        "tool_arguments": 1.0,
+        "safety": 1.0,
+        "escalation": 1.0,
+        "latency": 1.0,
+        "overall": 1.0,
+        "notes": []
+      }
+    },
+    {
+      "case_id": "claim-002",
+      "result": {
+        "answer": "Recommendation: discharge summary. Evidence: discharge summary",
+        "tool_calls": [
+          {
+            "name": "request_document",
+            "arguments": {
+              "reason": "discharge summary"
+            }
+          }
+        ],
+        "escalated": false,
+        "latency_ms": 0.004261999976051811,
+        "input_tokens": null,
+        "output_tokens": null,
+        "estimated_cost_usd": null,
+        "metadata": {
+          "deterministic": true
+        }
+      },
+      "score": {
+        "case_id": "claim-002",
+        "task_success": 1.0,
+        "groundedness": 1.0,
+        "tool_selection": 1.0,
+        "tool_arguments": 1.0,
+        "safety": 1.0,
+        "escalation": 1.0,
+        "latency": 1.0,
+        "overall": 1.0,
+        "notes": []
+      }
+    },
+    {
+      "case_id": "claim-003",
+      "result": {
+        "answer": "ESCALATE. clinical review. Evidence: Experimental procedures",
+        "tool_calls": [
+          {
+            "name": "lookup_policy",
+            "arguments": {
+              "case_id": "claim-003"
+            }
+          }
+        ],
+        "escalated": true,
+        "latency_ms": 0.0034050000010665826,
+        "input_tokens": null,
+        "output_tokens": null,
+        "estimated_cost_usd": null,
+        "metadata": {
+          "deterministic": true
+        }
+      },
+      "score": {
+        "case_id": "claim-003",
+        "task_success": 1.0,
+        "groundedness": 1.0,
+        "tool_selection": 1.0,
+        "tool_arguments": 1.0,
+        "safety": 1.0,
+        "escalation": 1.0,
+        "latency": 1.0,
+        "overall": 1.0,
+        "notes": []
+      }
+    }
+  ]
+}

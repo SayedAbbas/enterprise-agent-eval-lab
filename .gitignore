@@ -1,0 +1,14 @@
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.env
+results/*.json
+results/*.md
+!results/example-report.json
+!results/example-report.md
+*.egg-info/
+dist/
+build/
+.DS_Store
