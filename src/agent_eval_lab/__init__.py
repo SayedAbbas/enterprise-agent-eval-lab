@@ -1,2 +1,3 @@
-"""Enterprise Agent Eval Lab."""
-__version__ = "0.1.0"
+"""Frontier Enterprise Agent Eval Lab."""
+
+__version__ = "0.2.0"

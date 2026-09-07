@@ -3,9 +3,9 @@ requires = ["setuptools>=69", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "enterprise-agent-eval-lab"
-version = "0.1.0"
-description = "Vendor-neutral evaluation harness for enterprise AI agents"
+name = "frontier-enterprise-agent-eval-lab"
+version = "0.2.0"
+description = "Reproducible, vendor-neutral evaluation of frontier enterprise agents"
 readme = "README.md"
 requires-python = ">=3.10"
 authors = [{name = "Shabi Abbas"}]

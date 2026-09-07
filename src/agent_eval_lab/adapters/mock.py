@@ -6,6 +6,7 @@ from ..schema import AgentResult, EvalCase, ToolCall
 class MockAgentAdapter:
     """Deterministic adapter for local demos and CI."""
     name = "mock"
+    model = "deterministic-reference"
 
     def run(self, case: EvalCase) -> AgentResult:
         started = time.perf_counter()
@@ -24,7 +25,7 @@ class MockAgentAdapter:
             tool_calls=calls,
             escalated=case.expected.should_escalate,
             latency_ms=(time.perf_counter() - started) * 1000,
-            metadata={"deterministic": True},
+            metadata={"deterministic": True, "model": self.model},
         )
 
     @staticmethod

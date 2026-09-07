@@ -12,4 +12,9 @@ def run_evaluation(cases, adapter, latency_target_ms=5000.0):
         reports.append({"case_id": case.id, "result": asdict(result), "score": asdict(score)})
     summary = aggregate(scores)
     summary.pop("case_scores", None)
-    return {"provider": adapter.name, "summary": summary, "cases": reports}
+    return {
+        "provider": adapter.name,
+        "model": getattr(adapter, "model", adapter.name),
+        "summary": summary,
+        "cases": reports,
+    }
