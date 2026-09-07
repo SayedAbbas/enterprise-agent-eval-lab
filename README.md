@@ -200,6 +200,12 @@ tests/                     deterministic behavioral tests
 
 This is an independent engineering project, not an official benchmark from any model provider. Results from a small synthetic suite must not be presented as a universal model ranking. Evaluate models against your own risk profile, workflows, and governance requirements.
 
+## Try it and share feedback
+
+Run the [local demo](#demo--sample-results), then [open an issue](https://github.com/SayedAbbas/enterprise-agent-eval-lab/issues) with the command you ran, your Python version, and what you expected versus what happened. Remove credentials and private data from any logs.
+
+If this helps your work, consider starring the repository. Useful feedback and reproducible failure cases are especially welcome.
+
 ## Author & related work
 
 [Shabi Abbas Sayed](https://github.com/SayedAbbas) focuses on production-grade Enterprise AI Agents, Agent Evals, MCP, Voice/Realtime AI, RAG, Guardrails, and Production AI.
