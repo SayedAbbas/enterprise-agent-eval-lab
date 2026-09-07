@@ -13,6 +13,10 @@ It runs the same synthetic enterprise cases against OpenAI, Anthropic Claude, Go
 
 > A polished answer is not the same as a trustworthy action.
 
+**Built by [Shabi Abbas Sayed](https://github.com/SayedAbbas)** · Senior Applied AI Solutions Architect @ AWS · 2× AWS re:Invent Speaker
+
+[Quick start](#quick-start--no-api-key) · [Architecture](#architecture) · [Compare models](#compare-models) · [Scoring rubric](#scoring-rubric) · [Evaluation methodology](docs/evaluation-methodology.md)
+
 ## Why this project matters
 
 Production agents fail in ways ordinary chat benchmarks miss. They can choose the wrong tool, invent evidence, omit required arguments, cross an authorization boundary, or act confidently when they should escalate. This lab turns those risks into explicit, reproducible measurements.
@@ -161,6 +165,15 @@ tests/                     deterministic behavioral tests
 ## Responsible use
 
 This is an independent engineering project, not an official benchmark from any model provider. Results from a small synthetic suite must not be presented as a universal model ranking. Evaluate models against your own risk profile, workflows, and governance requirements.
+
+## Author & related work
+
+[Shabi Abbas Sayed](https://github.com/SayedAbbas) focuses on production-grade Enterprise AI Agents, Agent Evals, MCP, Voice/Realtime AI, RAG, Guardrails, and Production AI.
+
+- Explore the [Managed Services SLA Recovery Agent](https://github.com/SayedAbbas/managed-services-sla-recovery-agent) for a related enterprise workflow project.
+- Visit my [GitHub profile](https://github.com/SayedAbbas) for selected AWS Samples work in voice and realtime AI.
+
+This is a personal project. Views are my own.
 
 ## License
 
