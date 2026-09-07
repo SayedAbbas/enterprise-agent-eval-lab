@@ -15,7 +15,7 @@ It runs the same synthetic enterprise cases against OpenAI, Anthropic Claude, Go
 
 **Built by [Shabi Abbas Sayed](https://github.com/SayedAbbas)** · Senior Applied AI Solutions Architect @ AWS · 2× AWS re:Invent Speaker
 
-[Quick start](#quick-start--no-api-key) · [Architecture](#architecture) · [Compare models](#compare-models) · [Scoring rubric](#scoring-rubric) · [Evaluation methodology](docs/evaluation-methodology.md)
+[Quick start](#quick-start--no-api-key) · [Demo & sample results](#demo--sample-results) · [Architecture](#architecture) · [Compare models](#compare-models) · [Evaluation methodology](docs/evaluation-methodology.md)
 
 ## Why this project matters
 
@@ -45,6 +45,20 @@ The overall score supports comparison, while every underlying failure remains vi
 
 ## Architecture
 
+```mermaid
+flowchart TD
+    Cases["Synthetic cases: task, evidence, tools, expected behavior"] --> Runner[Evaluation runner]
+    Runner --> Providers["OpenAI / Anthropic / Gemini / Grok"]
+    Runner --> Mock[Deterministic mock]
+    Providers --> Result[Normalized AgentResult]
+    Mock --> Result
+    Result --> Scoring["Task success, grounding, tools, safety, escalation, latency"]
+    Scoring --> Reports["JSON reports and Markdown summaries / leaderboard"]
+```
+
+<details>
+<summary>Text architecture</summary>
+
 ```text
 Synthetic enterprise cases
  task + evidence + allowed tools + expected behavior
@@ -66,11 +80,15 @@ Synthetic enterprise cases
               JSON reports + Markdown leaderboard
 ```
 
+</details>
+
 The benchmark proposes tool calls but never executes business actions. Provider outputs are normalized into one schema before scoring, keeping evaluation logic independent from vendor APIs.
 
 ## Quick start — no API key
 
 ```bash
+git clone https://github.com/SayedAbbas/enterprise-agent-eval-lab.git
+cd enterprise-agent-eval-lab
 python -m venv .venv
 source .venv/bin/activate        # Windows: .venv\Scripts\activate
 pip install -e ".[dev]"
@@ -78,6 +96,22 @@ pip install -e ".[dev]"
 pytest -q
 agent-eval run --dataset datasets/claims.jsonl --provider mock
 ```
+
+For a versioned starting point, use the [v0.2.0 release](https://github.com/SayedAbbas/enterprise-agent-eval-lab/releases/tag/v0.2.0) and run `git checkout v0.2.0` before installing.
+
+## Demo & sample results
+
+After installing, this local demo requires no API key and makes no model-provider calls:
+
+```bash
+agent-eval run --dataset datasets/claims.jsonl --provider mock --output results/demo.json
+```
+
+Open `results/demo.md` for the readable report or `results/demo.json` for case-level evidence. Preview the checked-in [example report](results/example-report.md) and [raw JSON](results/example-report.json).
+
+The bundled demonstration contains **3 synthetic claims cases**. The deterministic mock produces an overall score of **1.000** by constructing responses from the expected answers. This validates the reporting path; it is **not a live-model benchmark or evidence of production readiness**. Measured local latency varies by machine.
+
+For live-model evaluation, follow the provider setup below and record the model, dataset, configuration, and repeated-run results. No live-provider performance claim is made by this demo.
 
 ## Run a frontier model
 
