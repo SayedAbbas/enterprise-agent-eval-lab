@@ -21,6 +21,8 @@ It runs the same synthetic enterprise cases against OpenAI, Anthropic Claude, Go
 
 **The fastest way to understand the project:**
 
+▶️ **[Open the self-running silent demo](demo/index.html)** — a ~60-second, no-voice screen story with built-in captions. See [demo recording instructions](demo/README.md).
+
 1. Run one synthetic enterprise dataset against the deterministic local adapter.
 2. Inspect the case-level result—not just the aggregate score.
 3. See whether the agent selected the right tool, supplied valid arguments, stayed grounded, respected safety boundaries, and escalated correctly.
