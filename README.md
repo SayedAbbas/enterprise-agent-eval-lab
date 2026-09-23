@@ -15,7 +15,27 @@ It runs the same synthetic enterprise cases against OpenAI, Anthropic Claude, Go
 
 **Built by [Shabi Abbas Sayed](https://github.com/SayedAbbas)** · Senior Applied AI Solutions Architect @ AWS · 2× AWS re:Invent Speaker
 
-[Quick start](#quick-start--no-api-key) · [Demo & sample results](#demo--sample-results) · [Architecture](#architecture) · [Compare models](#compare-models) · [Evaluation methodology](docs/evaluation-methodology.md)
+[60-second demo](#60-second-demo) · [Quick start](#quick-start--no-api-key) · [Demo & sample results](#demo--sample-results) · [Architecture](#architecture) · [Compare models](#compare-models) · [Contribute](#contribute)
+
+## 60-second demo
+
+**The fastest way to understand the project:**
+
+1. Run one synthetic enterprise dataset against the deterministic local adapter.
+2. Inspect the case-level result—not just the aggregate score.
+3. See whether the agent selected the right tool, supplied valid arguments, stayed grounded, respected safety boundaries, and escalated correctly.
+4. Swap the adapter for OpenAI, Anthropic, Gemini, or Grok and compare the same workload.
+5. Use the resulting failures as regression tests before the next release.
+
+```bash
+agent-eval run --dataset datasets/claims.jsonl --provider mock --output results/demo.json
+```
+
+**Production principle:** a correct final answer is not enough. Evaluate the **trajectory + outcome**.
+
+> Observability tells you what happened. Evals tell you whether it was acceptable.
+
+A visual dashboard, trajectory explorer, adversarial suites, cost-per-success metrics, and more provider/integration adapters are now open contribution tracks below.
 
 ## Why this project matters
 
@@ -188,6 +208,22 @@ src/agent_eval_lab/       adapters, runner, scoring, reporting, CLI
 tests/                     deterministic behavioral tests
 .github/workflows/ci.yml  lint, unit tests, end-to-end smoke run
 ```
+
+## Contribute
+
+This project is moving from a portfolio benchmark into a community-friendly production evaluation lab. Contributions are welcome—especially small, testable additions that improve real agent evaluation workflows.
+
+Good places to start:
+
+- **Visual eval dashboard** — browse runs, scores, failures, and release-gate status.
+- **Trajectory explorer** — inspect tool selection, arguments, order, retries, and policy failures.
+- **Adversarial suite** — prompt injection, unauthorized actions, weak evidence, and escalation cases.
+- **Cost per successful outcome** — normalize token/API cost against successful task completion.
+- **Provider adapters** — add another frontier/open model behind the existing normalized result contract.
+- **MCP evaluation** — score MCP tool discovery, selection, arguments, and authorization boundaries.
+- **HTML report** — generate a shareable visual artifact from a benchmark run.
+
+Look for issues labeled `good first issue` and `help wanted`. Please keep bundled examples synthetic and never commit credentials or customer data.
 
 ## Roadmap
 
