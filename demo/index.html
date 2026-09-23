@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Frontier Enterprise Agent Eval Lab — 60s Demo</title>
+<style>
+:root{--ink:#0f172a;--muted:#64748b;--line:#e2e8f0;--blue:#2563eb;--green:#15803d;--red:#dc2626;--bg:#f8fafc}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif;background:white;color:var(--ink)}
+.wrap{width:min(1180px,94vw);margin:auto}.top{height:70px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line)}
+.brand{font-weight:800}.url{color:var(--muted);font-size:14px}.stage{min-height:650px;display:grid;place-items:center;padding:36px 0}
+.scene{display:none;width:100%;animation:in .45s ease}.scene.active{display:block}@keyframes in{from{opacity:0;transform:translateY(8px)}to{opacity:1}}
+.eyebrow{color:var(--blue);font-weight:800;text-transform:uppercase;letter-spacing:.12em;font-size:13px}
+h1{font-size:58px;line-height:1.04;margin:14px 0;max-width:1000px}h2{font-size:38px;margin:10px 0 24px}.sub{font-size:23px;color:var(--muted);max-width:900px;line-height:1.45}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.card{border:1px solid var(--line);border-radius:16px;padding:22px;background:var(--bg)}
+.metric{display:flex;justify-content:space-between;font-size:20px;margin:14px 0}.ok{color:var(--green);font-weight:800}.bad{color:var(--red);font-weight:800}
+.term{background:#0b1220;color:#dbeafe;border-radius:16px;padding:26px;font:18px ui-monospace,SFMono-Regular,Menlo,monospace;line-height:1.8}
+.flow{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.pill{padding:14px 18px;border:1px solid var(--line);border-radius:999px;font-weight:700}.arrow{color:var(--muted)}
+.gate{border:2px solid #fecaca;background:#fff7f7;border-radius:22px;padding:38px;text-align:center}.gate .x{font-size:70px;color:var(--red);font-weight:900}.gate h2{font-size:50px;margin:4px}
+.caption{position:fixed;left:50%;transform:translateX(-50%);bottom:22px;background:#0f172a;color:white;padding:14px 22px;border-radius:12px;font-size:20px;font-weight:650;max-width:90vw;text-align:center}
+.progress{position:fixed;left:0;bottom:0;height:4px;background:var(--blue);width:0}.tiny{font-size:14px;color:var(--muted);margin-top:24px}
+@media(max-width:800px){h1{font-size:40px}.grid{grid-template-columns:1fr}.stage{min-height:720px}}
+</style></head>
+<body><div class="wrap"><div class="top"><div class="brand">Frontier Enterprise Agent Eval Lab</div><div class="url">github.com/SayedAbbas/enterprise-agent-eval-lab</div></div>
+<main class="stage">
+<section class="scene active" data-caption="AI agents can return the right answer — and still fail in production."><div class="eyebrow">Production AI evaluation</div><h1>A correct answer can still hide a dangerous agent trajectory.</h1><p class="sub">Evaluate what the agent did—not only what it said.</p></section>
+<section class="scene" data-caption="One workload. Multiple frontier models. Production-grade evaluation."><div class="eyebrow">Vendor-neutral evaluation</div><h2>Same enterprise workload. Same evidence. Same tools. Same rubric.</h2><div class="flow"><span class="pill">OpenAI</span><span class="pill">Claude</span><span class="pill">Gemini</span><span class="pill">Grok</span><span class="arrow">→</span><span class="pill">Normalized AgentResult</span></div></section>
+<section class="scene" data-caption="Run identical synthetic enterprise scenarios across providers."><div class="term">$ agent-eval compare --dataset datasets/claims.jsonl \<br>&nbsp;&nbsp;--providers openai anthropic gemini grok<br><br>Loading synthetic enterprise cases... ✓<br>Normalizing provider outputs... ✓<br>Scoring trajectories and outcomes... ✓</div></section>
+<section class="scene" data-caption="Don't evaluate only the final answer. Evaluate the complete trajectory."><h2>Case: claim-003</h2><div class="grid"><div class="card"><div class="metric">Task success <span class="ok">✓</span></div><div class="metric">Grounding <span class="ok">✓</span></div></div><div class="card"><div class="metric">Tool selection <span class="bad">✕</span></div><div class="metric">Tool arguments <span class="ok">✓</span></div></div><div class="card"><div class="metric">Safety <span class="bad">✕</span></div><div class="metric">Escalation <span class="ok">✓</span></div></div></div></section>
+<section class="scene" data-caption="A convincing response can still contain an unsafe action."><div class="eyebrow">Trajectory failure</div><h2>The answer looked right. The action path wasn't.</h2><div class="term">Expected action&nbsp;&nbsp;: escalate_claim<br>Agent proposed&nbsp;&nbsp;&nbsp;: settle_claim<br>Authorization&nbsp;&nbsp;&nbsp;&nbsp;: DENIED<br>Safety gate&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: FAILED</div><p class="tiny">Illustrative screen transcript for the demo. Bundled project cases remain synthetic.</p></section>
+<section class="scene" data-caption="High-impact failures should block deployment."><div class="gate"><div class="x">×</div><div class="eyebrow">Production release gate</div><h2>BLOCKED</h2><p class="sub" style="margin:auto">Unauthorized high-impact action detected in the evaluation trajectory.</p></div></section>
+<section class="scene" data-caption="Observability tells us what happened. Evals tell us whether it was acceptable."><div class="eyebrow">Frontier Enterprise Agent Eval Lab</div><h1>Evaluate the trajectory.<br>Protect the outcome.</h1><p class="sub">Task success · Grounding · Tool use · Safety · Escalation · Latency</p><p style="font-size:20px;font-weight:800;margin-top:34px">github.com/SayedAbbas/enterprise-agent-eval-lab</p></section>
+</main></div><div class="caption" id="caption"></div><div class="progress" id="progress"></div>
+<script>
+const scenes=[...document.querySelectorAll('.scene')], cap=document.getElementById('caption'), prog=document.getElementById('progress');
+let i=0; const seconds=8; function show(n){scenes.forEach((s,j)=>s.classList.toggle('active',j===n));cap.textContent=scenes[n].dataset.caption;prog.style.width=((n+1)/scenes.length*100)+'%'}
+show(0); setInterval(()=>{i=(i+1)%scenes.length;show(i)},seconds*1000);
+document.addEventListener('keydown',e=>{if(e.key==='ArrowRight'){i=(i+1)%scenes.length;show(i)}if(e.key==='ArrowLeft'){i=(i-1+scenes.length)%scenes.length;show(i)}})
+</script></body></html>
