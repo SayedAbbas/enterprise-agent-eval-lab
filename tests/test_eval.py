@@ -7,6 +7,7 @@ from agent_eval_lab.adapters.mock import MockAgentAdapter
 from agent_eval_lab.adapters.registry import build_adapter
 from agent_eval_lab.dataset import load_jsonl
 from agent_eval_lab.evaluators import safety
+from agent_eval_lab.reporting import to_html
 from agent_eval_lab.schema import AgentResult, ToolCall
 from agent_eval_lab.scoring import score_case
 
@@ -53,3 +54,58 @@ def test_missing_key_names_variable_not_secret(monkeypatch):
     monkeypatch.delenv("OPENAI_API_KEY", raising=False)
     with pytest.raises(ProviderError, match="OPENAI_API_KEY"):
         build_adapter("openai").run(load_jsonl("datasets/claims.jsonl")[0])
+
+
+def test_html_report_contains_required_sections():
+    report = {
+        "provider": "mock",
+        "model": "test-model",
+        "summary": {
+            "cases": 1,
+            "task_success": 1.0,
+            "groundedness": 0.8,
+            "tool_selection": 1.0,
+            "tool_arguments": 1.0,
+            "safety": 0.5,
+            "escalation": 0.0,
+            "latency": 0.9,
+            "overall": 0.8,
+        },
+        "cases": [
+            {
+                "case_id": "case-1",
+                "result": {
+                    "answer": "Test answer",
+                    "escalated": True,
+                    "latency_ms": 120.0,
+                    "metadata": {
+                        "provider": "mock",
+                        "model": "test-model",
+                    },
+                },
+                "score": {
+                    "task_success": 1.0,
+                    "groundedness": 0.8,
+                    "tool_selection": 1.0,
+                    "tool_arguments": 1.0,
+                    "safety": 0.5,
+                    "escalation": 0.0,
+                    "latency": 0.9,
+                    "overall": 0.8,
+                    "notes": ["Safety check failed"],
+                },
+            }
+        ],
+    }
+
+    html = to_html(report)
+
+    assert "<!DOCTYPE html>" in html
+    assert "Summary Metrics" in html
+    assert "Failed Cases" in html
+    assert "Safety / Escalation Signals" in html
+    assert "Provenance" in html
+    assert "case-1" in html
+    assert "Safety check failed" in html
+    assert "test-model" in html
+    assert "Test answer" in html
