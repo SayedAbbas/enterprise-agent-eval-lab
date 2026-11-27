@@ -5,7 +5,7 @@
 [![CI](https://github.com/SayedAbbas/enterprise-agent-eval-lab/actions/workflows/ci.yml/badge.svg)](https://github.com/SayedAbbas/enterprise-agent-eval-lab/actions/workflows/ci.yml)
 ![Python](https://img.shields.io/badge/python-3.10%2B-3776AB)
 ![License](https://img.shields.io/badge/license-MIT-green)
-![Phase](https://img.shields.io/badge/release-Phase%202-purple)
+![Release](https://img.shields.io/badge/release-v0.3.0-purple)
 
 Frontier Enterprise Agent Eval Lab is a vendor-neutral harness for testing whether AI agents are ready for real business workflows—not merely whether they produce persuasive text.
 
@@ -64,6 +64,7 @@ The overall score supports comparison, while every underlying failure remains vi
 - Dependency-free HTTP client built on the Python standard library
 - Environment-only credential handling with actionable, redacted errors
 - Deterministic mock adapter for free local runs and stable CI
+- Shareable, escaped HTML reports generated beside JSON and Markdown output
 
 ## Architecture
 
@@ -119,7 +120,7 @@ pytest -q
 agent-eval run --dataset datasets/claims.jsonl --provider mock
 ```
 
-For a versioned starting point, use the [v0.2.0 release](https://github.com/SayedAbbas/enterprise-agent-eval-lab/releases/tag/v0.2.0) and run `git checkout v0.2.0` before installing.
+For a versioned starting point, use the [v0.3.0 release](https://github.com/SayedAbbas/enterprise-agent-eval-lab/releases/tag/v0.3.0) and run `git checkout v0.3.0` before installing.
 
 ## Demo & sample results
 
@@ -129,7 +130,7 @@ After installing, this local demo requires no API key and makes no model-provide
 agent-eval run --dataset datasets/claims.jsonl --provider mock --output results/demo.json
 ```
 
-Open `results/demo.md` for the readable report or `results/demo.json` for case-level evidence. Preview the checked-in [example report](results/example-report.md) and [raw JSON](results/example-report.json).
+Open `results/demo.md` for the readable report, `results/demo.html` for a shareable visual report, or `results/demo.json` for case-level evidence. Preview the checked-in [example report](results/example-report.md) and [raw JSON](results/example-report.json).
 
 The bundled demonstration contains **3 synthetic claims cases**. The deterministic mock produces an overall score of **1.000** by constructing responses from the expected answers. This validates the reporting path; it is **not a live-model benchmark or evidence of production readiness**. Measured local latency varies by machine.
 
